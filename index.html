@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apexflow Market Dollar Hunters | Ehaldart Global FX & Binary Terminal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: { colors: { darker: '#030712', cardbg: '#0d1b2a', accent: '#10b981', gold: '#FFD700' } }
+            }
+        }
+    </script>
+    <style>
+        .gold-ghost-glow { color: #FFD700; text-shadow: 0 0 25px rgba(255, 215, 0, 0.7), 0 0 50px rgba(255, 215, 0, 0.4); letter-spacing: 0.15em; }
+        .wallpaper-bg { background-color: #030712; background-image: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 50%), radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.06) 0%, transparent 40%), radial-gradient(circle at 90% 90%, rgba(255, 215, 0, 0.04) 0%, transparent 40%); }
+        .trading-grid-bg { background-image: linear-gradient(rgba(16, 185, 129, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(16, 185, 129, 0.05) 1px, transparent 1px); background-size: 20px 20px; }
+    </style>
+</head>
+<body class="wallpaper-bg trading-grid-bg text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white">
+
+    <!-- PROFIT NOTIFICATION BANNER -->
+    <div id="profit-toast-banner" class="fixed top-20 right-6 z-50 transform translate-x-full opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="bg-slate-950/95 border-2 border-gold rounded-2xl p-4 shadow-[0_0_30px_rgba(255,215,0,0.35)] backdrop-blur-xl flex items-center space-x-3.5">
+            <div class="bg-emerald-500/20 p-2.5 rounded-xl border border-emerald-500/40 text-emerald-400 text-lg">📉 ✅</div>
+            <div>
+                <div class="text-[10px] font-mono font-bold tracking-widest text-gold uppercase">COURTESY OF ELHADARTGLOBALFX 📉 ✅</div>
+                <div id="profit-toast-details" class="text-xs font-bold text-white mt-0.5">A+ Execution Profit Secured</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3-MINUTE BLOODLINE LOADING SPLASH SCREEN -->
+    <div id="splash-screen" class="fixed inset-0 z-50 bg-[#02040a] flex flex-col items-center justify-center p-6 transition-opacity duration-1000">
+        <div class="max-w-lg w-full bg-slate-950/95 border border-gold/40 rounded-2xl p-8 shadow-2xl text-center space-y-6 backdrop-blur-xl relative overflow-hidden">
+            <div class="absolute inset-0 opacity-15 pointer-events-none flex items-end justify-around px-4">
+                <div class="w-4 bg-emerald-500 h-1/2 rounded-t"></div>
+                <div class="w-4 bg-red-500 h-1/3 rounded-t"></div>
+                <div class="w-4 bg-emerald-500 h-3/4 rounded-t"></div>
+                <div class="w-4 bg-emerald-500 h-5/6 rounded-t"></div>
+                <div class="w-4 bg-red-500 h-2/3 rounded-t"></div>
+                <div class="w-4 bg-emerald-500 h-full rounded-t"></div>
+            </div>
+            <div class="inline-flex p-4 bg-gold/10 rounded-2xl border border-gold/30 relative z-10">
+                <svg class="w-10 h-10 text-gold animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <div class="space-y-2 relative z-10">
+                <h2 class="text-xs font-bold tracking-widest text-slate-400 uppercase">EHALDART GLOBAL FX & BINARY TERMINAL</h2>
+                <h1 class="text-3xl md:text-4xl font-black uppercase gold-ghost-glow">JAMAL EHALDART</h1>
+                <p class="text-[11px] text-slate-400 font-mono tracking-wider">APEXFLOW MARKET DOLLAR HUNTERS • VOLATILITY 1S & DIGIT SUITE</p>
+            </div>
+            <div class="space-y-2 relative z-10">
+                <div class="w-full bg-slate-900 h-2.5 rounded-full overflow-hidden border border-slate-800">
+                    <div id="core-progress-bar" class="bg-gradient-to-r from-amber-500 to-gold h-full w-0 transition-all duration-300 shadow-[0_0_15px_rgba(255,215,0,0.5)]"></div>
+                </div>
+                <div class="flex justify-between items-center text-xs font-mono text-slate-400">
+                    <span id="loading-status-text" class="text-gold">Synchronizing Volatility 1s & Digit Analyzers...</span>
+                    <span id="loading-timer-display" class="text-gold font-bold">03:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 sticky top-0 z-40">
+        <div class="flex items-center space-x-3">
+            <div class="w-3 h-3 bg-emerald-500 rounded-full animate-ping"></div>
+            <span class="font-black tracking-widest text-emerald-400 text-sm">APEXFLOW // EHALDART FX</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="btn-audio-toggle" onclick="toggleTerminalAudio()" class="bg-slate-900 hover:bg-slate-800 text-gold text-xs font-mono font-bold px-3 py-1.5 rounded-xl border border-gold/30 transition flex items-center space-x-1.5">
+                <span id="audio-status-icon">🔊</span>
+                <span id="audio-status-text">SFX ON</span>
+            </button>
+            <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+                <button id="btn-mode-demo" onclick="switchAccountMode('demo')" class="px-3 py-1 rounded-lg font-bold bg-emerald-600 text-white transition">DEMO</button>
+                <button id="btn-mode-real" onclick="switchAccountMode('real')" class="px-3 py-1 rounded-lg font-semibold text-slate-400 hover:text-white transition">REAL</button>
+            </div>
+            <div class="text-right">
+                <div class="text-[10px] text-slate-400 uppercase font-mono">Account Balance</div>
+                <div id="account-balance-display" class="text-sm font-bold font-mono text-emerald-400">$1,000.00</div>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="loginWithDeriv()" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition">OAuth Login</button>
+                <button onclick="signupWithDeriv()" class="bg-slate-900 hover:bg-slate-800 text-slate-200 text-xs font-bold px-3.5 py-2 rounded-xl border border-slate-800 transition">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <!-- LEFT: VOLATILITY 1S & COMPLETE ASSETS -->
+        <div class="space-y-6">
+            <div class="bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-5 shadow-2xl space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300">Asset & Volatility 1s Hub</h2>
+                    <span id="tick-buffer-count" class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">0 / 5000 Ticks</span>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <label class="text-[10px] text-slate-400 font-mono">Market Category</label>
+                        <select id="market-category" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 mt-1">
+                            <option value="volatility_1s">Volatility 1s Indices (Fast 1-Sec Tick)</option>
+                            <option value="synthetic">Standard Synthetics & Jump</option>
+                            <option value="forex">Forex Majors & Minors</option>
+                            <option value="stocks">Global Stocks & Indices</option>
+                            <option value="crypto">Cryptocurrencies</option>
+                            <option value="commodities">Commodities (Gold, Oil)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-[10px] text-slate-400 font-mono">Tradable Instrument</label>
+                        <select id="asset-selector" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 mt-1"></select>
+                    </div>
+                    <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center">
+                        <span class="text-xs text-slate-400">Live Tick Quote:</span>
+                        <span id="live-quote-display" class="text-base font-mono font-bold text-emerald-400">0.0000</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Multi-Currency Conversion Room -->
+            <div class="bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-5 shadow-2xl space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300">Multi-Currency Conversion Room</h2>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-[10px] text-slate-400 font-mono">Amount (USD)</label>
+                        <input id="convert-amount" type="number" value="100" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white mt-1 focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="text-[10px] text-slate-400 font-mono">Target Currency</label>
+                        <select id="target-currency" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white mt-1 focus:outline-none focus:border-emerald-500">
+                            <option value="KES">KES (Kenyan Shilling)</option>
+                            <option value="UGX">UGX (Ugandan Shilling)</option>
+                            <option value="TZS">TZS (Tanzanian Shilling)</option>
+                            <option value="ETB">ETB (Ethiopian Birr)</option>
+                            <option value="EUR">EUR (Euro)</option>
+                            <option value="GBP">GBP (British Pound)</option>
+                            <option value="JPY">JPY (Japanese Yen)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
+                    <span class="text-slate-400">Converted Value:</span>
+                    <span id="converted-output" class="font-mono font-bold text-emerald-400">12,900.00 KES</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- CENTER: ALL DIGITS SCANNER & AI SPEED BOATS -->
+        <div class="space-y-6">
+            <!-- Comprehensive All-Digit Scanner Matrix -->
+            <div class="bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-5 shadow-2xl space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300">All-Digit Frequency & Probability Matrix</h2>
+                    <span id="last-digit-display" class="text-xs font-mono font-bold text-gold bg-amber-950/50 px-2.5 py-0.5 rounded border border-amber-800">Last Digit: --</span>
+                </div>
+                <div class="grid grid-cols-5 gap-2 text-center font-mono">
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">0</div><div id="freq-0" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">1</div><div id="freq-1" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">2</div><div id="freq-2" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">3</div><div id="freq-3" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">4</div><div id="freq-4" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">5</div><div id="freq-5" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">6</div><div id="freq-6" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">7</div><div id="freq-7" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">8</div><div id="freq-8" class="text-xs font-bold text-slate-200">0%</div></div>
+                    <div class="bg-slate-900 p-2 rounded-xl border border-slate-800"><div class="text-[9px] text-slate-500">9</div><div id="freq-9" class="text-xs font-bold text-slate-200">0%</div></div>
+                </div>
+                <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 space-y-2 text-xs font-mono">
+                    <div class="flex justify-between"><span class="text-slate-400">Best Differ / Match Target:</span><span id="digit-differ-recommendation" class="text-emerald-400 font-bold">Analyzing...</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Even / Odd Dominance:</span><span id="even-odd-recommendation" class="text-blue-400 font-bold">Analyzing...</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Over / Under Target:</span><span id="over-under-recommendation" class="text-amber-400 font-bold">Analyzing...</span></div>
+                </div>
+            </div>
+
+            <!-- AI Speed Boats & Execution -->
+            <div class="bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-5 shadow-2xl space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300">Millisecond AI Speed Boats (1-9)</h2>
+                    <span id="boat-status-badge" class="text-[10px] bg-slate-900 text-slate-300 px-2 py-0.5 rounded border border-slate-800 font-mono">STANDBY</span>
+                </div>
+                <div>
+                    <label class="text-[10px] text-slate-400 font-mono">Select Specialized Speed Boat</label>
+                    <select id="speed-boat-selector" class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-emerald-500 mt-1">
+                        <option value="boat_1">Boat 1: Volatility 1s Rise/Fall MACD Sniper (7% Stake)</option>
+                        <option value="boat_2">Boat 2: HTF/LTF 12-Candle Confluence (15% Stake)</option>
+                        <option value="boat_3">Boat 3: Digit Differ Dormant Hunter (3% Stake)</option>
+                        <option value="boat_4">Boat 4: Even / Odd Streak Reversal (5% Stake)</option>
+                        <option value="boat_5">Boat 5: Over 3 / Under 6 Boundary Scalper (10% Stake)</option>
+                        <option value="boat_6">Boat 6: Simultaneous Multi-Contract & Recovery (10% Stake)</option>
+                        <option value="boat_7">Boat 7: Simultaneous Mid-Digit Over/Under (5% Stake)</option>
+                        <option value="boat_8">Boat 8: Advanced Forex SMC/SMT Intraday Sniper (3% Stake)</option>
+                        <option value="boat_9">Boat 9: Multi-Market Automated Arbitrage & Scaling (5% Stake)</option>
+                    </select>
+                </div>
+                <button id="btn-launch-boat" onclick="toggleSpeedBoatExecution()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs transition shadow-lg">Launch Speed Boat</button>
+                <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-[11px] font-mono text-slate-400 space-y-1">
+                    <div id="trend-bias-status" class="flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-slate-600"></span> Engine waiting for A+ signal execution.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: LIVE KILLZONES & PRO SCANNER FEED -->
+        <div class="space-y-6">
+            <div class="bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-5 shadow-2xl space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300">Live Killzone & Currency Bias</h2>
+                    <span id="killzone-timer" class="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2.5 py-0.5 rounded border border-emerald-800">00:00:00 EAT</span>
+                </div>
+                <div class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-xs space-y-2.5 font-mono">
+                    <div class="flex justify-between"><span class="text-slate-400">Active Window:</span><span id="active-session-name" class="font-bold text-emerald-400">Calculating...</span></div>
+                    <div class="flex justify-between"><span class="text-slate-400">Primary Bias:</span><span id="active-currency-bias" class="font-bold text-amber-400">Neutral</span></div>
+                </div>
+            </div>
+
+            <div class="bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-5 shadow-2xl space-y-3">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300">Live Pro Scanner Entry Feed</h2>
+                <div id="pro-scanner-feed" class="bg-slate-900 p-3 rounded-xl border border-slate-800 text-[11px] font-mono space-y-2 text-slate-300 max-h-48 overflow-y-auto">
+                    <div class="text-slate-500">[System] Initializing Volatility 1s & Digit analytics...</div>
+                </div>
+            </div>
+
+            <div class="bg-slate-950/80 backdrop-blur-xl border border-slate-800/80 rounded-2xl p-5 shadow-2xl space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-300">High-Impact News Calendar</h2>
+                <div id="news-calendar-container" class="space-y-3 text-xs font-mono"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-slate-950/90 backdrop-blur-md border-t border-slate-800/80 py-4 px-6 text-center text-xs text-slate-400 font-mono">
+        Apexflow Market Dollar Hunters &copy; 2026 | All Rights Reserved
+    </footer>
+
+    <script src="derivApi.js"></script>
+    <script src="aiBotsEngine.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
